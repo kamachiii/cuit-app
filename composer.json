@@ -11,7 +11,8 @@
     "require": {
         "php": "^8.2",
         "laravel/framework": "^12.0",
-        "laravel/tinker": "^2.10.1"
+        "laravel/tinker": "^2.10.1",
+        "nativephp/electron": "^1.0"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -56,6 +57,10 @@
         "test": [
             "@php artisan config:clear --ansi",
             "@php artisan test"
+        ],
+        "native:dev": [
+            "Composer\\Config::disableProcessTimeout",
+            "npx concurrently -k -c \"#93c5fd,#c4b5fd\" \"php artisan native:serve --no-interaction\" \"npm run dev\" --names=app,vite"
         ]
     },
     "extra": {

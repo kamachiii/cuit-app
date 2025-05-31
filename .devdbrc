@@ -1,0 +1,6 @@
+[
+  {
+    "type": "sqlite",
+    "path": "c:\\xampp\\htdocs\\cuit-app\\database\\nativephp.sqlite"
+  }
+]

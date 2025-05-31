@@ -3,13 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\View\View;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\RedirectResponse;
 
 class AuthController extends Controller
 {
-    public function register(Request $request): RedirectResponse
+    public function register(): View
+    {
+        return view('register');
+    }
+    public function registerAction(Request $request): RedirectResponse
     {
         $request->validate([
             'username' => 'required|string|max:255',
@@ -26,7 +31,12 @@ class AuthController extends Controller
         return redirect()->route('login');
     }
 
-    public function login(Request $request): RedirectResponse
+    public function login(): View
+    {
+        return view('login');
+    }
+
+    public function loginAction(Request $request): RedirectResponse
     {
         if (Auth::attempt([
             'email' => $request->email,
@@ -40,6 +50,7 @@ class AuthController extends Controller
             'error' => 'Email or password is incorrect',
         ]);
     }
+    
     public function logout(Request $request): RedirectResponse
     {
         Auth::logout();

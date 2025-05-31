@@ -1,30 +1,19 @@
 <?php
 
-use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CuitController;
 
 
 Route::middleware('auth')->group(function () {
-
-    Route::get('/', function () {
-        return view('home');
-    })->name('home');
-
-    Route::post('/logout', [AuthController::class, 'logout'])
-        ->name('logout');
+    Route::get('/', [CuitController::class, 'index'])->name('home');
+    Route::post('/post', [CuitController::class, 'post'])->name('post');
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
 Route::middleware('guest')->group(function () {
-    Route::get('/login', function () {
-        return view('login');
-    })->name('login');
-
-    Route::get('/register', function () {
-        return view('register');
-    })->name('register');
-
-    Route::post('/register', [AuthController::class, 'register'])
-        ->name('register.post');
-    Route::post('/login', [AuthController::class, 'login'])
-        ->name('login.post');
+    Route::get('/login', [AuthController::class, 'login'])->name('login');
+    Route::get('/register', [AuthController::class, 'register'])->name('register');
+    Route::post('/register', [AuthController::class, 'registerAction'])->name('register.post');
+    Route::post('/login', [AuthController::class, 'loginAction'])->name('login.post');
 });
